@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethio-Visa | Premier Educational Consultancy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --primary: #1a4f8b;
-            --primary-dark: #0d3a6b;
+            --primary: #181818;
+            --primary-dark: #181818;
             --primary-light: #e8f1ff;
-            --secondary: #f8b500;
-            --secondary-dark: #e09a00;
+            --secondary: #545454;
+            --secondary-dark: #545454;
             --light: #f8f9fc;
-            --dark: #2d3e50;
+            --dark: #1e293b;
             --gray: #64748b;
-            --light-gray: #e2e8f0;
+            --light-gray: #f1f5f9;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.12);
-            --radius: 12px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --border-light: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -38,7 +46,12 @@
             font-size: 1.05rem;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             line-height: 1.2;
@@ -83,7 +96,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem 2.25rem;
+            padding: 10px 2.25rem;
             background-color: var(--primary);
             color: white;
             border-radius: 100px;
@@ -95,6 +108,25 @@
             cursor: pointer;
             gap: 0.5rem;
             font-size: 1.05rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover:before {
+            width: 100%;
         }
 
         .btn:hover {
@@ -122,14 +154,24 @@
         }
 
         /* Header Styles */
-        header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            padding: 1.25rem 0;
+     header {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 95%; 
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    padding: 10px 0;
+    left: 50%; /* Position from left */
+    transform: translateX(-50%); /* Center the header */
+    top: 10px;
+    transition: all 0.3s ease; 
+}
+
+        header.scrolled {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            top: 10px;
+
         }
 
         .header-container {
@@ -157,6 +199,7 @@
             display: flex;
             list-style: none;
             gap: 2.5rem;
+            align-items: center;
         }
 
         .nav-link {
@@ -179,7 +222,8 @@
             transition: var(--transition);
         }
 
-        .nav-link:hover:after, .nav-link.active:after {
+        .nav-link:hover:after,
+        .nav-link.active:after {
             width: 100%;
         }
 
@@ -192,41 +236,69 @@
             color: var(--dark);
         }
 
-        /* Completely New Elegant Hero Section */
+        /* Enhanced Hero Carousel Section */
         .hero {
             position: relative;
             height: 100vh;
             min-height: 700px;
             overflow: hidden;
-            padding-top: 6rem;
-            display: flex;
-            align-items: center;
-            background: linear-gradient( rgba(26, 79, 139, 0.95) 0%, rgba(13, 58, 107, 0.95) 100%);
         }
 
-        .hero-bg-pattern {
+        .hero-carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(96, 97, 99, 0.233);
             z-index: 1;
+        }
+
+        .carousel-slide:nth-child(1) {
+            background-image: url('img/plane.jpg');
+                
+        }
+
+        .carousel-slide:nth-child(2) {
+            background-image: url('img/plane.jpg');
+        }
+
+        .carousel-slide:nth-child(3) {
+            background-image: url('img/plane.jpg');
         }
 
         .hero-container {
             position: relative;
             z-index: 2;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-content {
+            width: 100%;
             color: white;
+            text-align: center;
         }
 
         .hero-title {
@@ -241,6 +313,10 @@
             opacity: 0.9;
             line-height: 1.6;
             margin-bottom: 2.5rem;
+            max-width: 800px;
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
             animation: fadeInUp 1s ease-out 0.3s both;
         }
 
@@ -248,55 +324,65 @@
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
+            justify-content: center;
             animation: fadeInUp 1s ease-out 0.6s both;
         }
 
-        .hero-visual {
-            position: relative;
-            height: 500px;
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+            backdrop-filter: blur(5px);
         }
 
-        .hero-image-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        .carousel-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
         }
 
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
+        .carousel-prev {
+            left: 2rem;
         }
 
-        .hero-image-container:hover .hero-image {
-            transform: scale(1.05);
+        .carousel-next {
+            right: 2rem;
         }
 
-        .hero-overlay {
+        .carousel-indicators {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem;
-            background: linear-gradient(to top, rgba(26, 79, 139, 0.9) 0%, transparent 100%);
-            color: white;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
         }
 
-        .hero-overlay h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
         }
 
-        .hero-overlay p {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0;
+        .carousel-indicator.active {
+            background: white;
+            transform: scale(1.2);
         }
 
         .hero-shape {
@@ -305,8 +391,9 @@
             left: 0;
             width: 100%;
             height: 150px;
-            background: white; 
+            background: white;
             z-index: 1;
+            clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 100%);
         }
 
         .hero-scroll-indicator {
@@ -338,6 +425,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -345,12 +433,19 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
                 transform: translateY(0) translateX(-50%);
             }
+
             40% {
                 transform: translateY(-10px) translateX(-50%);
             }
+
             60% {
                 transform: translateY(-5px) translateX(-50%);
             }
@@ -400,6 +495,7 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            border: var(--border-light);
         }
 
         .service-card:before {
@@ -550,6 +646,7 @@
             box-shadow: var(--shadow);
             text-align: center;
             transition: var(--transition);
+            border: var(--border-light);
         }
 
         .feature:hover {
@@ -577,6 +674,7 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
+            border: var(--border-light);
         }
 
         .destination-card:hover {
@@ -598,7 +696,7 @@
             left: 0;
             width: 100%;
             height: 50%;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
         }
 
         .destination-content {
@@ -659,6 +757,7 @@
             width: 220px;
             margin: 1rem;
             flex-grow: 1;
+            border: var(--border-light);
         }
 
         .step-number {
@@ -690,6 +789,7 @@
             text-align: center;
             margin: 0 auto;
             position: relative;
+            border: var(--border-light);
         }
 
         .testimonial-card:before {
@@ -765,11 +865,27 @@
             color: white;
             text-align: center;
             padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
         }
 
         .cta h2 {
             color: white;
             margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
         }
 
         .cta p {
@@ -777,6 +893,8 @@
             max-width: 700px;
             margin: 0 auto 2.5rem;
             font-size: 1.2rem;
+            position: relative;
+            z-index: 2;
         }
 
         /* Footer */
@@ -884,11 +1002,11 @@
             h1 {
                 font-size: 3rem;
             }
-            
+
             h2 {
                 font-size: 2.5rem;
             }
-            
+
             .hero-title {
                 font-size: 3rem;
             }
@@ -899,21 +1017,16 @@
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
-            
-            .hero-visual {
-                order: -1;
-                height: 400px;
-            }
-            
+
             .about-container {
                 grid-template-columns: 1fr;
                 gap: 4rem;
             }
-            
+
             .process-steps {
                 justify-content: center;
             }
-            
+
             .process-steps:before {
                 display: none;
             }
@@ -923,7 +1036,7 @@
             .hamburger {
                 display: block;
             }
-            
+
             .nav-menu {
                 position: fixed;
                 top: 0;
@@ -932,36 +1045,55 @@
                 height: 100vh;
                 background: white;
                 flex-direction: column;
-                align-items: center;
-                justify-content: center;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding-top: 6rem;
                 transition: var(--transition);
                 box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
                 z-index: 1000;
             }
-            
+
             .nav-menu.active {
                 right: 0;
             }
-            
+
+            .nav-menu li {
+                margin: 1rem 2rem;
+            }
+
             .hero-title {
                 font-size: 2.5rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 1.2rem;
             }
-            
+
             .hero-buttons {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
             }
-            
+
             .section {
                 padding: 4rem 0;
             }
-            
+
             .hero-shape {
                 height: 100px;
+            }
+
+            .carousel-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .carousel-prev {
+                left: 1rem;
+            }
+
+            .carousel-next {
+                right: 1rem;
             }
         }
 
@@ -969,27 +1101,23 @@
             .container {
                 padding: 0 1.5rem;
             }
-            
+
             h1 {
                 font-size: 2.5rem;
             }
-            
+
             h2 {
                 font-size: 2.25rem;
             }
-            
+
             .hero-title {
                 font-size: 2.25rem;
             }
-            
+
             .services-grid,
             .destinations-grid,
             .features {
                 grid-template-columns: 1fr;
-            }
-            
-            .hero-visual {
-                height: 350px;
             }
         }
 
@@ -999,119 +1127,165 @@
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <a href="index.html" class="logo">
-                <i class="fas fa-graduation-cap logo-icon"></i>
-                <span>Ethio-Visa</span>
-            </a>
-            
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="countries.html" class="nav-link">Destinations</a></li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li><a href="enroll.html" class="btn">Enroll Now</a></li>
-            </ul>
-        </div>
-    </header>
 
-    <!-- Completely New Elegant Hero Section -->
-    <section class="hero">
-        <div class="hero-bg-pattern"></div>
-        <div class="container hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">Transform Your Future with Global Education</h1>
-                <p class="hero-subtitle">Ethio-Visa provides expert guidance for Ethiopian students seeking world-class education abroad. From university selection to visa success, we're with you every step of the way.</p>
-                <div class="hero-buttons">
-                    <a href="services.html" class="btn">Discover Our Services <i class="fas fa-arrow-right"></i></a>
-                    <a href="contact.html" class="btn btn-light">Book Free Consultation <i class="fas fa-calendar"></i></a>
+<body> 
+        <!-- Header -->
+        <header>
+            <div class="container header-container">
+                <a href="index.html" class="logo" style="padding: 10px;">
+
+                    <img src="img/evlogo.png" alt="Ethio-Visa Logo" class="logo-icon"
+                        style=" height: 60px; float: left; color: black;">
+                    <span style="color: black;">ETHIO-VISA</span>
+                </a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="countries.html" class="nav-link">Destinations</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="enroll.html" class="btn">Enroll Now</a></li>
+                </ul>
+            </div>
+        </header> 
+    <!-- Enhanced Hero Carousel Section -->
+    <section class="hero" id="hero">
+        <div class="hero-carousel">
+            <!-- Slide 1 -->
+            <div class="carousel-slide active">
+                <div class="container hero-container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Transform Your Future with Global Education</h1>
+                        <p class="hero-subtitle">Ethio-Visa provides expert guidance for Ethiopian students seeking
+                            world-class education abroad. From university selection to visa success, we're with you
+                            every step of the way.</p>
+                        <div class="hero-buttons">
+                            <a href="services.html" class="btn">Discover Our Services <i
+                                    class="fas fa-arrow-right"></i></a>
+                            <a href="contact.html" class="btn btn-light">Book Free Consultation <i
+                                    class="fas fa-calendar"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="hero-visual">
-                <div class="hero-image-container">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Students celebrating graduation" class="hero-image">
-                    <div class="hero-overlay">
-                        <h3>98% Visa Success Rate</h3>
-                        <p>Join thousands of successful students who achieved their dreams with our guidance</p>
+
+            <!-- Slide 2 -->
+            <div class="carousel-slide">
+                <div class="container hero-container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">98% Visa Success Rate</h1>
+                        <p class="hero-subtitle">Join thousands of successful students who achieved their dreams with
+                            our guidance. Our proven track record ensures your application stands out.</p>
+                        <div class="hero-buttons">
+                            <a href="about.html" class="btn">Our Success Stories <i class="fas fa-trophy"></i></a>
+                            <a href="contact.html" class="btn btn-light">Get Started Today <i
+                                    class="fas fa-rocket"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-slide">
+                <div class="container hero-container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Global University Partnerships</h1>
+                        <p class="hero-subtitle">We have strong relationships with top universities worldwide, ensuring
+                            you get access to the best educational opportunities and scholarship options.</p>
+                        <div class="hero-buttons">
+                            <a href="countries.html" class="btn">Explore Destinations <i class="fas fa-globe"></i></a>
+                            <a href="contact.html" class="btn btn-light">Schedule a Call <i
+                                    class="fas fa-phone"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Hero shape divider -->
-        <div class="hero-shape"></div>
-        
-        <!-- Scroll indicator -->
-        <div class="hero-scroll-indicator">
-            <span class="hero-scroll-text">Discover More</span>
-            <i class="fas fa-chevron-down hero-scroll-arrow"></i>
+
+        <!-- Carousel Navigation -->
+        <button class="carousel-nav carousel-prev" id="carouselPrev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-nav carousel-next" id="carouselNext">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators" id="carouselIndicators">
+            <span class="carousel-indicator active" data-slide="0"></span>
+            <span class="carousel-indicator" data-slide="1"></span>
+            <span class="carousel-indicator" data-slide="2"></span>
         </div>
+
+
+
     </section>
 
     <!-- Services Section -->
-    <section class="section">
+    <section class="section" id="services">
         <div class="container">
             <div class="section-title fade-in">
                 <h2>Our Comprehensive Services</h2>
                 <p>We provide end-to-end support for students seeking international education opportunities</p>
             </div>
-            
+
             <div class="services-grid">
                 <div class="service-card fade-in">
                     <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
                     <h3>Course Selection</h3>
-                    <p>Our expert advisors help you choose the right academic program based on your interests, qualifications, and career goals. We consider market trends and employment opportunities.</p>
+                    <p>Our expert advisors help you choose the right academic program based on your interests,
+                        qualifications, and career goals. We consider market trends and employment opportunities.</p>
                     <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
+
                 <div class="service-card fade-in">
                     <div class="service-icon"><i class="fas fa-university"></i></div>
                     <h3>University Selection</h3>
-                    <p>We help you identify universities that match your academic profile, budget, and preferences. Our database includes detailed information on rankings, programs, and admission requirements.</p>
+                    <p>We help you identify universities that match your academic profile, budget, and preferences. Our
+                        database includes detailed information on rankings, programs, and admission requirements.</p>
                     <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
+
                 <div class="service-card fade-in">
                     <div class="service-icon"><i class="fas fa-check-circle"></i></div>
                     <h3>Admission Assistance</h3>
-                    <p>Our team guides you through the entire application process, including document preparation, personal statement writing, and meeting application deadlines.</p>
+                    <p>Our team guides you through the entire application process, including document preparation,
+                        personal statement writing, and meeting application deadlines.</p>
                     <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
+
                 <div class="service-card fade-in">
                     <div class="service-icon"><i class="fas fa-dollar-sign"></i></div>
                     <h3>Financial Guidance</h3>
-                    <p>We help you explore scholarship opportunities, education loans, and financial aid options. Our experts assist with financial documentation and proof of funds preparation.</p>
+                    <p>We help you explore scholarship opportunities, education loans, and financial aid options. Our
+                        experts assist with financial documentation and proof of funds preparation.</p>
                     <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
+
                 <div class="service-card fade-in">
                     <div class="service-icon"><i class="fas fa-passport"></i></div>
                     <h3>Student Visa Assistance</h3>
-                    <p>Our visa experts provide comprehensive support throughout the visa application process, including documentation, interview preparation, and follow-up with embassies.</p>
+                    <p>Our visa experts provide comprehensive support throughout the visa application process, including
+                        documentation, interview preparation, and follow-up with embassies.</p>
                     <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
+
                 <div class="service-card fade-in">
                     <div class="service-icon"><i class="fas fa-plane-departure"></i></div>
                     <h3>Pre-Departure Orientation</h3>
-                    <p>We prepare you for your new life abroad with comprehensive sessions on cultural adaptation, accommodation, banking, and other essential aspects of international student life.</p>
+                    <p>We prepare you for your new life abroad with comprehensive sessions on cultural adaptation,
+                        accommodation, banking, and other essential aspects of international student life.</p>
                     <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
@@ -1119,15 +1293,19 @@
     </section>
 
     <!-- About Section -->
-    <section class="section about">
+    <section class="section about" id="about">
         <div class="container">
             <div class="about-container">
                 <div class="about-content fade-in">
                     <h2>About Ethio-Visa Consultancy</h2>
-                    <p>Ethio-Visa Consultancy was established in 2010 with a mission to empower Ethiopian students to achieve their dreams of studying abroad. Over the years, we have helped thousands of students secure admissions to prestigious universities around the world.</p>
-                    
-                    <p>Our team consists of experienced education consultants, visa experts, and former international students who understand the challenges and opportunities of studying abroad. We maintain strong relationships with educational institutions and immigration authorities worldwide.</p>
-                    
+                    <p>Ethio-Visa Consultancy was established in 2010 with a mission to empower Ethiopian students to
+                        achieve their dreams of studying abroad. Over the years, we have helped thousands of students
+                        secure admissions to prestigious universities around the world.</p>
+
+                    <p>Our team consists of experienced education consultants, visa experts, and former international
+                        students who understand the challenges and opportunities of studying abroad. We maintain strong
+                        relationships with educational institutions and immigration authorities worldwide.</p>
+
                     <ul>
                         <li>13+ years of experience in education consulting</li>
                         <li>Expert team with firsthand international education experience</li>
@@ -1136,12 +1314,13 @@
                         <li>Comprehensive support from inquiry to enrollment</li>
                         <li>Proven track record of visa success</li>
                     </ul>
-                    
+
                     <a href="about.html" class="btn">Learn More About Us <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
+
                 <div class="about-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ethio-Visa Team">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Ethio-Visa Team">
                 </div>
             </div>
 
@@ -1149,12 +1328,14 @@
                 <div class="feature fade-in">
                     <div class="feature-icon"><i class="fas fa-user-check"></i></div>
                     <h3>Personalized Approach</h3>
-                    <p>We provide individualized guidance tailored to each student's unique background, goals, and circumstances.</p>
+                    <p>We provide individualized guidance tailored to each student's unique background, goals, and
+                        circumstances.</p>
                 </div>
                 <div class="feature fade-in">
                     <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
                     <h3>End-to-End Support</h3>
-                    <p>From initial consultation to post-arrival assistance, we're with you at every step of your journey.</p>
+                    <p>From initial consultation to post-arrival assistance, we're with you at every step of your
+                        journey.</p>
                 </div>
                 <div class="feature fade-in">
                     <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
@@ -1166,52 +1347,63 @@
     </section>
 
     <!-- Destinations Section -->
-    <section class="section">
+    <section class="section" id="destinations">
         <div class="container">
             <div class="section-title fade-in">
                 <h2>Popular Study Destinations</h2>
                 <p>We have strong partnerships with universities in these countries and more</p>
             </div>
-            
+
             <div class="destinations-grid">
                 <div class="destination-card fade-in">
-                    <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="destination-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                    </div>
                     <div class="destination-content">
                         <h3>United States</h3>
-                        <p>Home to world-renowned universities offering diverse programs and excellent research opportunities.</p>
+                        <p>Home to world-renowned universities offering diverse programs and excellent research
+                            opportunities.</p>
                         <div class="destination-meta">
                             <span><i class="fas fa-university"></i> 200+ Universities</span>
                             <span><i class="fas fa-graduation-cap"></i> All Fields</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="destination-card fade-in">
-                    <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1519832979-6fa011b87667?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="destination-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1519832979-6fa011b87667?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                    </div>
                     <div class="destination-content">
                         <h3>Canada</h3>
-                        <p>High-quality education system with post-study work opportunities and pathways to permanent residency.</p>
+                        <p>High-quality education system with post-study work opportunities and pathways to permanent
+                            residency.</p>
                         <div class="destination-meta">
                             <span><i class="fas fa-university"></i> 90+ Universities</span>
                             <span><i class="fas fa-graduation-cap"></i> All Fields</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="destination-card fade-in">
-                    <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="destination-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                    </div>
                     <div class="destination-content">
                         <h3>Australia</h3>
-                        <p>Innovative teaching methods, vibrant student life, and globally recognized qualifications.</p>
+                        <p>Innovative teaching methods, vibrant student life, and globally recognized qualifications.
+                        </p>
                         <div class="destination-meta">
                             <span><i class="fas fa-university"></i> 40+ Universities</span>
                             <span><i class="fas fa-graduation-cap"></i> All Fields</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="destination-card fade-in">
-                    <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1519211975560-4ca611f5a72a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="destination-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1519211975560-4ca611f5a72a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                    </div>
                     <div class="destination-content">
                         <h3>United Kingdom</h3>
                         <p>Prestigious universities with rich academic heritage and shorter degree programs.</p>
@@ -1222,7 +1414,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="text-center" style="margin-top: 4rem;">
                 <a href="countries.html" class="btn">View All Destinations <i class="fas fa-arrow-right"></i></a>
             </div>
@@ -1230,38 +1422,38 @@
     </section>
 
     <!-- Process Section -->
-    <section class="section process">
+    <section class="section process" id="process">
         <div class="container">
             <div class="section-title fade-in">
                 <h2>Our Process</h2>
                 <p>We follow a structured approach to ensure your success at every step</p>
             </div>
-            
+
             <div class="process-steps">
                 <div class="step fade-in">
                     <div class="step-number">1</div>
                     <h3>Initial Consultation</h3>
                     <p>We assess your profile, goals, and preferences to develop a personalized strategy.</p>
                 </div>
-                
+
                 <div class="step fade-in">
                     <div class="step-number">2</div>
                     <h3>University Shortlisting</h3>
                     <p>We identify suitable universities and programs based on your academic background and goals.</p>
                 </div>
-                
+
                 <div class="step fade-in">
                     <div class="step-number">3</div>
                     <h3>Application Preparation</h3>
                     <p>We assist with document preparation, statement of purpose, and recommendation letters.</p>
                 </div>
-                
+
                 <div class="step fade-in">
                     <div class="step-number">4</div>
                     <h3>Visa Assistance</h3>
                     <p>We guide you through the entire visa application process and prepare you for the interview.</p>
                 </div>
-                
+
                 <div class="step fade-in">
                     <div class="step-number">5</div>
                     <h3>Pre-Departure Briefing</h3>
@@ -1272,17 +1464,21 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="section testimonials">
+    <section class="section testimonials" id="testimonials">
         <div class="container">
             <div class="section-title fade-in">
                 <h2>Success Stories</h2>
                 <p>Hear from students who achieved their dreams with our guidance</p>
             </div>
-            
+
             <div class="testimonials-container">
                 <div class="testimonial-card fade-in">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Zekariyase Melaku" class="testimonial-image">
-                    <p class="testimonial-quote">Ethio-Visa Consultancy shaped my academic and career path. Their guidance secured my dream school admission and set me up for success. The team was incredibly supportive throughout the entire process, from selecting the right program to visa preparation.</p>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                        alt="Zekariyase Melaku" class="testimonial-image">
+                    <p class="testimonial-quote">Ethio-Visa Consultancy shaped my academic and career path. Their
+                        guidance secured my dream school admission and set me up for success. The team was incredibly
+                        supportive throughout the entire process, from selecting the right program to visa preparation.
+                    </p>
                     <h4 class="testimonial-author">Zekariyase Melaku</h4>
                     <p class="testimonial-role">MS in Computer Science, Stanford University</p>
                 </div>
@@ -1293,21 +1489,27 @@
                     <h3>Our University Partners</h3>
                 </div>
                 <div class="partners-grid">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+1" alt="Partner University" class="partner-logo fade-in">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+2" alt="Partner University" class="partner-logo fade-in">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+3" alt="Partner University" class="partner-logo fade-in">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+4" alt="Partner University" class="partner-logo fade-in">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+5" alt="Partner University" class="partner-logo fade-in">
+                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+1"
+                        alt="Partner University" class="partner-logo fade-in">
+                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+2"
+                        alt="Partner University" class="partner-logo fade-in">
+                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+3"
+                        alt="Partner University" class="partner-logo fade-in">
+                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+4"
+                        alt="Partner University" class="partner-logo fade-in">
+                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+5"
+                        alt="Partner University" class="partner-logo fade-in">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta">
+    <section class="cta" id="cta">
         <div class="container">
             <h2 class="fade-in">Ready to Begin Your Educational Journey?</h2>
-            <p class="fade-in">Schedule a free consultation with our experts to discuss your opportunities for studying abroad</p>
+            <p class="fade-in">Schedule a free consultation with our experts to discuss your opportunities for studying
+                abroad</p>
             <div class="hero-buttons fade-in">
                 <a href="contact.html" class="btn btn-light">Book Consultation <i class="fas fa-calendar"></i></a>
                 <a href="tel:+251910526705" class="btn btn-secondary">Call Now <i class="fas fa-phone"></i></a>
@@ -1321,7 +1523,8 @@
             <div class="footer-grid">
                 <div>
                     <h3 class="footer-heading">Ethio-Visa</h3>
-                    <p style="color: rgba(255, 255, 255, 0.7);">Empowering Ethiopian students to achieve their dreams of international education through expert guidance and comprehensive support.</p>
+                    <p style="color: rgba(255, 255, 255, 0.7);">Empowering Ethiopian students to achieve their dreams of
+                        international education through expert guidance and comprehensive support.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
@@ -1330,7 +1533,7 @@
                         <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
-                
+
                 <div>
                     <h3 class="footer-heading">Quick Links</h3>
                     <ul class="footer-links">
@@ -1341,7 +1544,7 @@
                         <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h3 class="footer-heading">Contact Info</h3>
                     <div class="footer-contact">
@@ -1352,17 +1555,19 @@
                         <p><i class="fas fa-clock"></i> Saturday: 9:00 AM – 1:00 PM</p>
                     </div>
                 </div>
-                
+
                 <div>
                     <h3 class="footer-heading">Newsletter</h3>
-                    <p style="color: rgba(255, 255, 255, 0.7);">Subscribe to our newsletter for updates on new opportunities and education news.</p>
+                    <p style="color: rgba(255, 255, 255, 0.7);">Subscribe to our newsletter for updates on new
+                        opportunities and education news.</p>
                     <form>
-                        <input type="email" placeholder="Your Email" style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 100px; border: none;">
+                        <input type="email" placeholder="Your Email"
+                            style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 100px; border: none;">
                         <button type="submit" class="btn" style="width: 100%;">Subscribe</button>
                     </form>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>&copy; 2023 Ethio-Visa Consultancy. All rights reserved. Designed by Yonicodes</p>
             </div>
@@ -1373,7 +1578,7 @@
         // Mobile menu toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
-        
+
         hamburger.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
@@ -1387,26 +1592,84 @@
             });
         });
 
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Carousel functionality
+        const carouselSlides = document.querySelectorAll('.carousel-slide');
+        const carouselIndicators = document.querySelectorAll('.carousel-indicator');
+        const prevButton = document.getElementById('carouselPrev');
+        const nextButton = document.getElementById('carouselNext');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            // Hide all slides
+            carouselSlides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Remove active class from all indicators
+            carouselIndicators.forEach(indicator => {
+                indicator.classList.remove('active');
+            });
+
+            // Calculate the new slide index
+            currentSlide = (n + carouselSlides.length) % carouselSlides.length;
+
+            // Show the current slide and activate its indicator
+            carouselSlides[currentSlide].classList.add('active');
+            carouselIndicators[currentSlide].classList.add('active');
+        }
+
+        // Event listeners for carousel navigation
+        prevButton.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+
+        nextButton.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+
+        // Event listeners for carousel indicators
+        carouselIndicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+
+        // Auto-advance carousel every 5 seconds
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+
         // Fade-in animation for elements
         const fadeElements = document.querySelectorAll('.fade-in');
-        
+
         function checkFade() {
             fadeElements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
                 const elementVisible = 150;
-                
+
                 if (elementTop < window.innerHeight - elementVisible) {
                     element.classList.add('visible');
                 }
             });
         }
-        
+
         // Check on load and scroll
         window.addEventListener('load', checkFade);
         window.addEventListener('scroll', checkFade);
-        
+
         // Initial check
         checkFade();
     </script>
 </body>
+
 </html>
