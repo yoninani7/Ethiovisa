@@ -13,7 +13,7 @@
         :root {
             --primary: #181818;
             --primary-dark: #181818;
-            --primary-light: #e8f1ff;
+            --primary-light: #93939423;
             --secondary: #545454;
             --secondary-dark: #545454;
             --light: #f8f9fc;
@@ -96,10 +96,10 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 10px 2.25rem;
+            padding: 8px 2rem;
             background-color: var(--primary);
             color: white;
-            border-radius: 100px;
+            border-radius: 10px;
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
@@ -154,19 +154,22 @@
         }
 
         /* Header Styles */
-     header {
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    width: 95%; 
-    z-index: 1000;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    padding: 10px 0;
-    left: 50%; /* Position from left */
-    transform: translateX(-50%); /* Center the header */
-    top: 10px;
-    transition: all 0.3s ease; 
-}
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 95%;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding: 4px 0;
+            left: 50%;
+            /* Position from left */
+            transform: translateX(-50%);
+            /* Center the header */
+            top: 10px;
+            transition: all 0.3s ease;
+            border-radius: var(--radius);
+        }
 
         header.scrolled {
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -276,21 +279,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(96, 97, 99, 0.233);
+            background: rgba(0, 0, 0, 0.664);
             z-index: 1;
         }
 
         .carousel-slide:nth-child(1) {
-            background-image: url('img/plane.jpg');
-                
+            background-image: url('img/books.jpg');
+
         }
 
         .carousel-slide:nth-child(2) {
-            background-image: url('img/plane.jpg');
+            background-image: url('img/about us.jpg');
         }
 
         .carousel-slide:nth-child(3) {
-            background-image: url('img/plane.jpg');
+            background-image: url('img/skyscrapers.jpg');
         }
 
         .hero-container {
@@ -332,7 +335,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
+            background: transparent;
             border: none;
             color: white;
             font-size: 2rem;
@@ -349,7 +352,6 @@
         }
 
         .carousel-nav:hover {
-            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-50%) scale(1.1);
         }
 
@@ -398,21 +400,21 @@
 
         .hero-scroll-indicator {
             position: absolute;
-            bottom: 2rem;
+            bottom: 8%;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: white;
+            color: white; 
             z-index: 10;
             animation: bounce 2s infinite;
         }
 
         .hero-scroll-text {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.8;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem; 
+            font-weight: bold;
         }
 
         .hero-scroll-arrow {
@@ -1135,30 +1137,31 @@
     </style>
 </head>
 
-<body> 
-        <!-- Header -->
-        <header>
-            <div class="container header-container">
-                <a href="index.html" class="logo" style="padding: 10px;">
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo" style="padding: 10px;">
 
-                    <img src="img/evlogo.png" alt="Ethio-Visa Logo" class="logo-icon"
-                        style=" height: 60px; float: left; color: black;">
-                    <span style="color: black;">ETHIO-VISA</span>
-                </a>
-                <button class="hamburger" id="hamburger">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <img src="img/evlogo.png" alt="Ethio-Visa Logo" class="logo-icon"
+                    style=" height: 50px; float: left; color: black;">
+                <span
+                    style="color: black; font-size: 20px; font-family: 'Playfair Display', serif; font-weight: 1200w; ">ETHIO-VISA</span>
+            </a>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
 
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="index.html" class="nav-link active">Home</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="countries.html" class="nav-link">Destinations</a></li>
-                    <li><a href="services.html" class="nav-link">Services</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                    <li><a href="enroll.html" class="btn">Enroll Now</a></li>
-                </ul>
-            </div>
-        </header> 
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="countries.html" class="nav-link">Destinations</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="enroll.html" class="btn">Enroll Now</a></li>
+            </ul>
+        </div>
+    </header>
     <!-- Enhanced Hero Carousel Section -->
     <section class="hero" id="hero">
         <div class="hero-carousel">
@@ -1166,10 +1169,10 @@
             <div class="carousel-slide active">
                 <div class="container hero-container">
                     <div class="hero-content">
-                        <h1 class="hero-title">Transform Your Future with Global Education</h1>
-                        <p class="hero-subtitle">Ethio-Visa provides expert guidance for Ethiopian students seeking
-                            world-class education abroad. From university selection to visa success, we're with you
-                            every step of the way.</p>
+                        <h1 class="hero-title">Dream Big, Achieve Bigger !</h1>
+                        <p class="hero-subtitle">Transform your academic dreams into reality with our dedicated
+                            assistance.
+                            Let us assist you in reaching new heights in your educational journey.</p>
                         <div class="hero-buttons">
                             <a href="services.html" class="btn">Discover Our Services <i
                                     class="fas fa-arrow-right"></i></a>
@@ -1184,9 +1187,9 @@
             <div class="carousel-slide">
                 <div class="container hero-container">
                     <div class="hero-content">
-                        <h1 class="hero-title">98% Visa Success Rate</h1>
-                        <p class="hero-subtitle">Join thousands of successful students who achieved their dreams with
-                            our guidance. Our proven track record ensures your application stands out.</p>
+                        <h1 class="hero-title">Embark on New Adventures</h1>
+                        <p class="hero-subtitle">With our help, you’re just steps away from studying abroad and discovering new 
+                            cultures.The world while you advance your education—your adventure awaits!</p>
                         <div class="hero-buttons">
                             <a href="about.html" class="btn">Our Success Stories <i class="fas fa-trophy"></i></a>
                             <a href="contact.html" class="btn btn-light">Get Started Today <i
@@ -1200,9 +1203,10 @@
             <div class="carousel-slide">
                 <div class="container hero-container">
                     <div class="hero-content">
-                        <h1 class="hero-title">Global University Partnerships</h1>
-                        <p class="hero-subtitle">We have strong relationships with top universities worldwide, ensuring
-                            you get access to the best educational opportunities and scholarship options.</p>
+                        <h1 class="hero-title">Together Towards Success !</h1>
+                        <p class="hero-subtitle">Count on our expertise to help you take the leap toward a bright
+                            future.
+                            Together, we’ll lay the groundwork for your academic success.</p>
                         <div class="hero-buttons">
                             <a href="countries.html" class="btn">Explore Destinations <i class="fas fa-globe"></i></a>
                             <a href="contact.html" class="btn btn-light">Schedule a Call <i
@@ -1213,6 +1217,9 @@
             </div>
         </div>
 
+        <a class="hero-scroll-indicator" href="#services" style="text-decoration: none; ">
+            <span class="hero-scroll-text">Discover more &nbsp;<i class="fas fa-arrow-down"></i></span>
+        </a>
         <!-- Carousel Navigation -->
         <button class="carousel-nav carousel-prev" id="carouselPrev">
             <i class="fas fa-chevron-left"></i>
@@ -1221,14 +1228,8 @@
             <i class="fas fa-chevron-right"></i>
         </button>
 
-        <!-- Carousel Indicators -->
-        <div class="carousel-indicators" id="carouselIndicators">
-            <span class="carousel-indicator active" data-slide="0"></span>
-            <span class="carousel-indicator" data-slide="1"></span>
-            <span class="carousel-indicator" data-slide="2"></span>
-        </div>
-
-
+        
+ 
 
     </section>
 
@@ -1603,8 +1604,7 @@
         });
 
         // Carousel functionality
-        const carouselSlides = document.querySelectorAll('.carousel-slide');
-        const carouselIndicators = document.querySelectorAll('.carousel-indicator');
+        const carouselSlides = document.querySelectorAll('.carousel-slide'); 
         const prevButton = document.getElementById('carouselPrev');
         const nextButton = document.getElementById('carouselNext');
         let currentSlide = 0;
@@ -1615,17 +1615,13 @@
                 slide.classList.remove('active');
             });
 
-            // Remove active class from all indicators
-            carouselIndicators.forEach(indicator => {
-                indicator.classList.remove('active');
-            });
+            
 
             // Calculate the new slide index
             currentSlide = (n + carouselSlides.length) % carouselSlides.length;
 
             // Show the current slide and activate its indicator
-            carouselSlides[currentSlide].classList.add('active');
-            carouselIndicators[currentSlide].classList.add('active');
+            carouselSlides[currentSlide].classList.add('active'); 
         }
 
         // Event listeners for carousel navigation
@@ -1637,17 +1633,12 @@
             showSlide(currentSlide + 1);
         });
 
-        // Event listeners for carousel indicators
-        carouselIndicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                showSlide(index);
-            });
-        });
+      
 
         // Auto-advance carousel every 5 seconds
         setInterval(() => {
             showSlide(currentSlide + 1);
-        }, 5000);
+        }, 7000);
 
         // Fade-in animation for elements
         const fadeElements = document.querySelectorAll('.fade-in');
