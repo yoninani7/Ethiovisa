@@ -85,7 +85,7 @@
         }
 
         .section {
-            padding: 6rem 0;
+            padding: 3rem 0;
         }
 
         .text-center {
@@ -118,15 +118,16 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 0;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%; 
+            height: 0;
+            background-color: rgba(255, 255, 255, 0.158);
             transition: var(--transition);
             z-index: -1;
         }
 
         .btn:hover:before {
-            width: 100%;
+            height: 100%;
+
         }
 
         .btn:hover {
@@ -506,8 +507,8 @@
             left: 0;
             width: 5px;
             height: 0;
-            background: var(--primary);
-            transition: var(--transition);
+            background: var(--secondary);
+            transition: ease-in-out 0.8s;
         }
 
         .service-card:hover:before {
@@ -1133,6 +1134,194 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+       .testimonials-slider {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    cursor: grab;
+}
+
+.testimonials-slider:active {
+    cursor: grabbing;
+}
+
+.testimonials-container {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    user-select: none; /* Prevent text selection while dragging */
+}
+
+.testimonial-card {
+    min-width: 100%;
+    padding: 2rem;
+    text-align: center;
+    box-sizing: border-box;
+    touch-action: pan-y; /* Allow vertical scrolling within card if needed */
+}
+
+.testimonial-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.5rem;
+    display: block;
+    border: 4px solid #1a4f8b;
+}
+
+.testimonial-quote {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-style: italic;
+    max-height: 120px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.testimonial-quote::-webkit-scrollbar {
+    width: 4px;
+}
+
+.testimonial-quote::-webkit-scrollbar-thumb {
+    background: #1a4f8b;
+    border-radius: 2px;
+}
+
+.testimonial-author {
+    color: #1a4f8b;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.testimonial-role {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.slider-dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 10px;
+}
+
+.slider-dots {
+    display: flex;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.dot.active {
+    background: #1a4f8b;
+    transform: scale(1.2);
+}
+
+.dot:hover {
+    transform: scale(1.1);
+}
+
+.dot::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border-radius: 50%;
+}
+
+/* Swipe hint animation (for first-time users) */
+@keyframes swipeHint {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.testimonials-slider {
+    position: relative;
+}
+
+.testimonials-slider::before {
+    content: '← Swipe →';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #1a4f8b;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(26, 79, 139, 0.2);
+    animation: swipeHint 3s ease-in-out infinite;
+    opacity: 0.9;
+    z-index: 10;
+    display: none;
+}
+
+/* Show hint on mobile only */
+@media (max-width: 768px) {
+    .testimonials-slider::before {
+        display: block;
+    }
+    
+    .slider-dots {
+        padding: 10px 16px;
+    }
+    
+    .dot {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .testimonials-slider::before {
+        top: -35px;
+        font-size: 0.75rem;
+        padding: 5px 12px;
+    }
+}
+
+/* Desktop hover effect */
+@media (hover: hover) and (pointer: fine) {
+    .testimonials-slider:hover {
+        cursor: ew-resize;
+    }
+}
+
+/* Loading animation for better UX */
+@keyframes fadeSlide {
+    from { opacity: 0.5; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.testimonial-card {
+    animation: fadeSlide 0.5s ease-out;
+}
+
     </style>
 </head>
 
@@ -1207,7 +1396,7 @@
                             future.
                             Together, we’ll lay the groundwork for your academic success.</p>
                         <div class="hero-buttons">
-                            <a href="#" class="btn">Explore Destinations <i class="fas fa-globe"></i></a>
+                            <a href="#destinations" class="btn">Explore Destinations <i class="fas fa-globe"></i></a>
                             <a href="contact.html" class="btn btn-light">Schedule a Call <i
                                     class="fas fa-phone"></i></a>
                         </div>
@@ -1232,66 +1421,6 @@
 
     </section>
 
-    <!-- Services Section -->
-    <section class="section" id="services">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2>Our Comprehensive Services</h2>
-                <p>We provide end-to-end support for students seeking international education opportunities</p>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Course Selection</h3>
-                    <p>Our expert advisors help you choose the right academic program based on your interests,
-                        qualifications, and career goals. We consider market trends and employment opportunities.</p>
-                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card fade-in">
-                    <div class="service-icon"><i class="fas fa-university"></i></div>
-                    <h3>University Selection</h3>
-                    <p>We help you identify universities that match your academic profile, budget, and preferences. Our
-                        database includes detailed information on rankings, programs, and admission requirements.</p>
-                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card fade-in">
-                    <div class="service-icon"><i class="fas fa-check-circle"></i></div>
-                    <h3>Admission Assistance</h3>
-                    <p>Our team guides you through the entire application process, including document preparation,
-                        personal statement writing, and meeting application deadlines.</p>
-                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card fade-in">
-                    <div class="service-icon"><i class="fas fa-dollar-sign"></i></div>
-                    <h3>Financial Guidance</h3>
-                    <p>We help you explore scholarship opportunities, education loans, and financial aid options. Our
-                        experts assist with financial documentation and proof of funds preparation.</p>
-                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card fade-in">
-                    <div class="service-icon"><i class="fas fa-passport"></i></div>
-                    <h3>Student Visa Assistance</h3>
-                    <p>Our visa experts provide comprehensive support throughout the visa application process, including
-                        documentation, interview preparation, and follow-up with embassies.</p>
-                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card fade-in">
-                    <div class="service-icon"><i class="fas fa-plane-departure"></i></div>
-                    <h3>Pre-Departure Orientation</h3>
-                    <p>We prepare you for your new life abroad with comprehensive sessions on cultural adaptation,
-                        accommodation, banking, and other essential aspects of international student life.</p>
-                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- About Section -->
     <section class="section about" id="about">
         <div class="container">
@@ -1306,8 +1435,7 @@
                         students who understand the challenges and opportunities of studying abroad. We maintain strong
                         relationships with educational institutions and immigration authorities worldwide.</p>
 
-                    <ul>
-                        <li>13+ years of experience in education consulting</li>
+                    <ul> 
                         <li>Expert team with firsthand international education experience</li>
                         <li>Personalized approach for each student</li>
                         <li>Strong network of university partners worldwide</li>
@@ -1341,6 +1469,66 @@
                     <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
                     <h3>Trusted Guidance</h3>
                     <p>Our advice is always honest, transparent, and in the best interest of our students.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Comprehensive Services</h2>
+                <p>We provide end-to-end support for students seeking international education opportunities</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Course Selection</h3>
+                    <p>Our expert advisors help you choose the right academic program based on your interests,
+                        qualifications, and career goals. We consider market trends and employment opportunities.</p>
+                    <a href="about.html" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon"><i class="fas fa-university"></i></div>
+                    <h3>University Selection</h3>
+                    <p>We help you identify universities that match your academic profile, budget, and preferences. Our
+                        database includes detailed information on rankings, programs, and admission requirements.</p>
+                    <a href="about.html" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3>Admission Assistance</h3>
+                    <p>Our team guides you through the entire application process, including document preparation,
+                        personal statement writing, and meeting application deadlines.</p>
+                    <a href="about.html" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <h3>Financial Guidance</h3>
+                    <p>We help you explore scholarship opportunities, education loans, and financial aid options. Our
+                        experts assist with financial documentation and proof of funds preparation.</p>
+                    <a href="about.html" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon"><i class="fas fa-passport"></i></div>
+                    <h3>Student Visa Assistance</h3>
+                    <p>Our visa experts provide comprehensive support throughout the visa application process, including
+                        documentation, interview preparation, and follow-up with embassies.</p>
+                    <a href="about.html" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon"><i class="fas fa-plane-departure"></i></div>
+                    <h3>Pre-Departure Orientation</h3>
+                    <p>We prepare you for your new life abroad with comprehensive sessions on cultural adaptation,
+                        accommodation, banking, and other essential aspects of international student life.</p>
+                    <a href="about.html" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -1385,20 +1573,7 @@
                     </div>
                 </div>
 
-                <div class="destination-card fade-in">
-                    <div class="destination-image"
-                        style="background-image: url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
-                    </div>
-                    <div class="destination-content">
-                        <h3>Australia</h3>
-                        <p>Innovative teaching methods, vibrant student life, and globally recognized qualifications.
-                        </p>
-                        <div class="destination-meta">
-                            <span><i class="fas fa-university"></i> 40+ Universities</span>
-                            <span><i class="fas fa-graduation-cap"></i> All Fields</span>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="destination-card fade-in">
                     <div class="destination-image"
@@ -1463,15 +1638,17 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="section testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2>Success Stories</h2>
-                <p>Hear from students who achieved their dreams with our guidance</p>
-            </div>
+   <!-- Testimonials Section -->
+<section class="section testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Success Stories</h2>
+            <p>Hear from students who achieved their dreams with our guidance</p>
+        </div>
 
+        <div class="testimonials-slider">
             <div class="testimonials-container">
+                <!-- Testimonial 1 -->
                 <div class="testimonial-card fade-in">
                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
                         alt="Zekariyase Melaku" class="testimonial-image">
@@ -1482,27 +1659,56 @@
                     <h4 class="testimonial-author">Zekariyase Melaku</h4>
                     <p class="testimonial-role">MS in Computer Science, Stanford University</p>
                 </div>
-            </div>
-
-            <div class="partners">
-                <div class="section-title fade-in">
-                    <h3>Our University Partners</h3>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b786d4d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                        alt="Selamawit Tesfaye" class="testimonial-image">
+                    <p class="testimonial-quote">I was overwhelmed by the application process, but the team at Ethio-Visa made everything so clear and manageable. They helped me craft a compelling personal statement that truly reflected my journey and aspirations. I couldn't have done it without them!</p>
+                    <h4 class="testimonial-author">Selamawit Tesfaye</h4>
+                    <p class="testimonial-role">MBA, Harvard Business School</p>
                 </div>
-                <div class="partners-grid">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+1"
-                        alt="Partner University" class="partner-logo fade-in">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+2"
-                        alt="Partner University" class="partner-logo fade-in">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+3"
-                        alt="Partner University" class="partner-logo fade-in">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+4"
-                        alt="Partner University" class="partner-logo fade-in">
-                    <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+5"
-                        alt="Partner University" class="partner-logo fade-in">
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                        alt="Mikias Haile" class="testimonial-image">
+                    <p class="testimonial-quote">From university selection to scholarship applications, Ethio-Visa Consultancy provided exceptional support. Their expertise in identifying the right programs and their thorough preparation for interviews were invaluable to my success.</p>
+                    <h4 class="testimonial-author">Mikias Haile</h4>
+                    <p class="testimonial-role">PhD in Engineering, MIT</p>
+                </div>
+            </div>
+            
+            <!-- Only dots for visual indicator -->
+            <div class="slider-dots-container">
+                <div class="slider-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
                 </div>
             </div>
         </div>
-    </section>
+
+        <div class="partners">
+            <div class="section-title fade-in">
+                <h3>Our University Partners</h3>
+            </div>
+            <div class="partners-grid">
+                <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+1"
+                    alt="Partner University" class="partner-logo fade-in">
+                <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+2"
+                    alt="Partner University" class="partner-logo fade-in">
+                <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+3"
+                    alt="Partner University" class="partner-logo fade-in">
+                <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+4"
+                    alt="Partner University" class="partner-logo fade-in">
+                <img src="https://via.placeholder.com/150x80/1a4f8b/ffffff?text=University+5"
+                    alt="Partner University" class="partner-logo fade-in">
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <!-- CTA Section -->
     <section class="cta" id="cta">
@@ -1660,6 +1866,93 @@
         // Initial check
         checkFade();
     </script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.testimonials-container');
+    const cards = document.querySelectorAll('.testimonial-card');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.slider-prev');
+    const nextBtn = document.querySelector('.slider-next');
+    let currentSlide = 0;
+    const totalSlides = cards.length;
+
+    function updateSlider() {
+        container.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    // Dot click events
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            currentSlide = parseInt(this.getAttribute('data-slide'));
+            updateSlider();
+        });
+    });
+
+    // Previous button
+    prevBtn.addEventListener('click', function() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    });
+
+    // Next button
+    nextBtn.addEventListener('click', function() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+    });
+
+    // Auto slide (optional)
+    let slideInterval = setInterval(() => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+    }, 5000);
+
+    // Pause auto-slide on hover
+    const slider = document.querySelector('.testimonials-slider');
+    slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    slider.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 5000);
+    });
+
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+
+    slider.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left - next slide
+                currentSlide = (currentSlide + 1) % totalSlides;
+            } else {
+                // Swipe right - previous slide
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            }
+            updateSlider();
+        }
+    }
+});
+</script>
 </body>
 
 </html>
